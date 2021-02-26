@@ -35,49 +35,65 @@ namespace JSON_Pokemon_F
 
                 foreach (var resultObject in api.results.OrderBy(x => x.name).ToList())
                 {
+
                     lstPokemon.Items.Add(resultObject);
-                }
+                }//do this again 
             }
         }
         public void lstPokemon_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            allPokemonAPI api;
             var selection = (ResultObject)lstPokemon.SelectedItem;
             lbName.Content = selection.name;
-            lbHeight.Content = selection.height;
-            lbWeight.Content = selection.weight;
-            
-        }
-        private void btnFront_Click(object sender, RoutedEventArgs e)
-        {
-            var selection = (ResultObject)lstPokemon.SelectedItem;
-            imgPokemon.Source = new BitmapImage(new Uri(selection.front_default));
-        }
+            //lbHeight.Content = selection.height;
+            //lbWeight.Content = selection.weight;
+            //imgPokemon.Source = new BitmapImage(new Uri(selection.sprite));
+            string urlSelected = selection.url;
+            var selectedPokemon = (SelectedPokemon)lstPokemon.SelectedItem;
+            using (var client = new HttpClient())
+            {
+                string json = client.GetStringAsync(urlSelected).Result;
+                api = JsonConvert.DeserializeObject<allPokemonAPI>(json);
 
-        private void btnBack_Click(object sender, RoutedEventArgs e)
-        {
-            var selection = (ResultObject)lstPokemon.SelectedItem;
-            imgPokemon.Source = new BitmapImage(new Uri(selection.back_default));
+                foreach (var resultObject in api.results.OrderBy(x => x.name).ToList())
+                {
+
+                }
+
+            }
+            //    private void btnFront_Click(object sender, RoutedEventArgs e)
+            //    {
+            //        var selection = (ResultObject)lstPokemon.SelectedItem;
+            //        imgPokemon.Source = new BitmapImage(new Uri(selection.sprite));
+            //    }
+
+            //    private void btnBack_Click(object sender, RoutedEventArgs e)
+            //    {
+            //        var selection = (ResultObject)lstPokemon.SelectedItem;
+            //        imgPokemon.Source = new BitmapImage(new Uri(selection.back_default));
+            //    }
+            //}
+            //no idea what im doing
+            //allPokemonAPI api;
+
+            //string url2 = selection.url;
+            //using (var client = new HttpClient())
+            //{
+            //    string json = client.GetStringAsync(url2).Result;
+            //    api = JsonConvert.DeserializeObject<allPokemonAPI>(json);
+
+            //    foreach (var pokemonSprite in api.results.OrderBy(x => x.name).ToList())
+            //    {
+            //        lstSprite.Items.Add(pokemonSprite);
+            //    }
+            //}
+            //var selection2 = (PokemonSprites)lstPokemon.SelectedItem;
+
+
+            // imgPokemon.Source = new BitmapImage(new Uri(selection.back_default));
+
+            //var selectedpokemon = (PokemonSprites)lstPokemon.SelectedItem;
+            //imgPokemon.Source = new BitmapImage(new Uri(selectedpokemon.back_default));
         }
     }
-    //no idea what im doing
-    //allPokemonAPI api;
-
-    //string url2 = selection.url;
-    //using (var client = new HttpClient())
-    //{
-    //    string json = client.GetStringAsync(url2).Result;
-    //    api = JsonConvert.DeserializeObject<allPokemonAPI>(json);
-
-    //    foreach (var pokemonSprite in api.results.OrderBy(x => x.name).ToList())
-    //    {
-    //        lstSprite.Items.Add(pokemonSprite);
-    //    }
-    //}
-    //var selection2 = (PokemonSprites)lstPokemon.SelectedItem;
-
-
-    // imgPokemon.Source = new BitmapImage(new Uri(selection.back_default));
-
-    //var selectedpokemon = (PokemonSprites)lstPokemon.SelectedItem;
-    //imgPokemon.Source = new BitmapImage(new Uri(selectedpokemon.back_default));
 }

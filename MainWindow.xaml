@@ -13,8 +13,6 @@
         <Label x:Name="lbHeight" Content="Label" HorizontalAlignment="Left" Height="36" Margin="412,63,0,0" VerticalAlignment="Top" Width="147"/>
         <Label x:Name="lbWeight" Content="Label" HorizontalAlignment="Left" Height="36" Margin="618,63,0,0" VerticalAlignment="Top" Width="150"/>
         <ListBox x:Name="lstSprite" Margin="658,350,0,0"/>
-        <Button x:Name="btnFront" Content="Button" HorizontalAlignment="Left" Height="39" Margin="500,104,0,0" VerticalAlignment="Top" Width="59" Click="btnFront_Click"/>
-        <Button x:Name="btnBack" Content="Button" HorizontalAlignment="Left" Height="39" Margin="618,104,0,0" VerticalAlignment="Top" Width="59" Click="btnBack_Click"/>
 
     </Grid>
 </Window>
